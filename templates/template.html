@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.svg') }}"> 
+        <meta name="theme-color" content="#343a40"> 
+    </head>
+    <body class = "site">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- 
+            <link rel = "stylesheet" href = "{{ url_for('static',filename = 'css/bootstrap.min.css')}}"> 
+        -->
+        <div class = "site-content">
+            <div class = "container-fluid bg-dark text-white">
+                <nav class = "navbar">
+                    <div class = 'text-white'>
+                        <h3 style = "font-family:sans-serif;" class="mb-1 mt-1">Code Red</h3>
+                    </div>
+                    <div class = 'd-none d-md-flex btn-group float-right'>
+                        <div class = 'btn btn-secondary'><a href = "{{ url_for('index') }}" class = 'text-white'>Home</a></div>
+                        <div class = 'btn btn-secondary'><a href = "{{ url_for('random') }}" class = 'text-white'>Random movie</a></div>
+                        <div class = 'btn btn-secondary'><a href = "{{ url_for('genres') }}" class = 'text-white'>Genres</a></div>
+                        <div class = 'btn btn-secondary'><a href = "{{url_for('contribute') }}" class = 'text-white'>Contribute</a></div>
+                    </div>
+                    <div class = 'd-md-none btn-group float-right'>
+                        <button type="button" class="btn btn-secondary dropdown-toggle shadow-none" data-toggle="dropdown">Menu
+                            <span class="caret"></span>
+                        </button>
+                        <ul class = 'dropdown-menu dropdown-menu-right shadow border-0' role = 'menu'>
+                            <li><a href = "{{ url_for('index') }}" class = 'text-center dropdown-item' role="menuitem">Home</a></li>
+                            <li><a href = "{{ url_for('random') }}" class = 'text-center dropdown-item' role="menuitem">Random movie</a></li>
+                            <li><a href = "{{url_for('genres') }}" class = 'text-center dropdown-item' role="menuitem">Genres</a></li>
+                            <li><a href = "{{url_for('contribute') }}" class = 'text-center dropdown-item' role="menuitem">Contribute</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class = "container-fluid p-3">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+        
+    
+    <style>
+        .site {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
+      
+      .site-content {
+        flex: 1;
+      }
+    </style>
+    <footer style = "background-color:#1c1c20" class = "text-white p-1 pl-3 pr-3 mt-4">
+        <div class = "row p-3 justify-content-center">
+            <div class = "col-md-6 container pl-md-5 pr-md-5 pt-4">
+                <h3>
+                    About Code Red
+                </h3>
+                <p class = "ml-2 mr-2 mt-3">
+                    Made with <img style = "width: 35px"  src = "{{ url_for('static', filename='images/flask.svg') }}"> and <img style = "width: 35px"  src = "{{ url_for('static', filename='images/postgres.svg') }}"> by <a href = "https://github.com/shrn01">me</a>, <a href = "https://github.com/fivmin">this</a> guy and <a href = "http://linkedin.com/in/dowluri-satya-ashok-7a5016161/">that</a> guy.
+                </p>
+                <p class = "ml-2 mr-2">
+                    If you want to add any movie or series you like which is not in the list, smash that contribute button up there. Cheers!
+                </p>
+                <p class = "ml-2 mr-2">
+                    Find an issue with this page? <a href = "https://github.com/shrn01/code-red">Raise issue</a>
+                </p>
+            </div>
+            <div class = "col-md-4 container pr-md-5 pl-md-5 pt-4">
+                <h3>
+                    Quick Links
+                </h3>
+                <p class = "footer-links">
+                    <ul class="list-unstyled pl-2">
+                        <li>
+                            <a class="text-white" href = "{{ url_for('index') }}">Home</a>
+                            
+                        </li>
+                        <li>
+                            <a class="text-white" href = "{{ url_for('random') }}">Random Suggestion</a>
+                            
+                        </li>
+                        <li>
+                            <a class = "text-white" href = "{{ url_for('genres') }}">All Genres</a>
+
+                        </li>
+                        <li>
+                            <a class="text-white" href = "{{ url_for('contribute') }}">Add a Movie/series</a>
+                            
+                        </li>
+                        <li>
+                            <a class="text-white" href = "{{ url_for('contributors') }}">Contributors</a>
+                            
+                        </li>
+                        <li>
+                            <a class="text-white" href = "https://github.com/shrn01/code-red">Github</a>
+                        </li>
+                      </ul>
+                    
+                </p>
+                
+            </div>
+            <div class = "col-md-3 container p-3">
+            </div>
+            
+        </div>
+    </footer>
+</body>
+</html>

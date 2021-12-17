@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+                Admin | Code Red
+        </title>
+        <meta name="theme-color" content="#343a40"> 
+
+        <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.svg') }}">  
+    </head>
+    <body style="background-color: rgb(248, 248, 248);">
+        {% extends "template.html" %}
+        {% block content %}
+        
+        
+        <div class = "container" style="max-width: 400px;">
+            {% if post == True %}
+            <div style = "background-color:tomato;" class = "container pt-3 pb-2 text-center mb-3 rounded">
+                <p>Deleted.</p>
+            </div>
+            {% endif %}
+
+            <h3>Delete an entry</h3>
+            <form method = "POST">
+                <div class = "form-group">
+                    <label for = "movie">Movie Name</label>
+                    <input required class = "form-control" placeholder="Enter Movie Name" type = "text", name = "movie">
+                </div>
+                <div class = "form-group">
+                    <label for = "password">Admin Password</label>
+                    <input required class = "form-control" placeholder="Enter Passsword" type = "password", name = "password">
+                </div>
+                <div>
+                    <input type = "submit" value = "Delete" class = "btn btn-danger", name = "Delete">
+                </div>
+            </form>
+            
+        </div>
+        {% endblock %}
+    </body>
+</html>

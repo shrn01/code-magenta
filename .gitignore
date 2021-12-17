@@ -1,0 +1,11 @@
+venv/
+.env
+local_database.db
+movies.db
+__pycache__/
+push.py
+.vscode/
+migrations/
+
+
+frontend/node_modules/

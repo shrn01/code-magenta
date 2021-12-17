@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+                Edit | Code Red
+        </title>
+        <meta name="theme-color" content="#343a40"> 
+        <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.svg') }}">  
+    </head>
+    <body style="background-color: rgb(248, 248, 248);">
+        {% extends "template.html" %}
+        {% block content %}
+        <div class = "container" style="max-width: 400px;">
+            <form method = "POST" enctype = 'multipart/form-data'>
+                <div class = "form-group" id = "movie_box">
+                    <label for = "summary">Tell about the movie without any spoilers</label>
+                    <textarea required class = "form-control" rows = "5" placeholder = "Add the summary in 2-3 lines" maxlength = "500" type = "text", name = "summary"></textarea>
+                </div>
+                <div>
+                    <input type = "submit" class = "btn btn-success", name = "Submit">
+                </div>
+            </form>
+            <form class = "mt-4" method = "POST" enctype = 'multipart/form-data'>
+                <p class="mb-2">Change Movie Poster</p>
+                <div class = "custom-file mb-3">
+                    <input class = "custom-file-input" accept=".jpg" type = "file", name = "image">
+                    <label for = "image" class = 'custom-file-label'>Upload movie poster (.jpg)</label>
+                </div>
+                <div>
+                    <input type = "submit" class = "btn btn-success", name = "Submit">
+                </div>
+            </form>
+            <script>
+                $(".custom-file-input").on("change", function() {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                });
+            </script>
+        </div>
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+                {{movie.movie}} | Code Red
+        </title>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.svg') }}">  
+        <meta name="theme-color" content="#343a40"> 
+
+    </head>
+    <body style="background-color: rgb(248, 248, 248);">
+        {% extends "template.html" %}
+        {% block content %}
+        <div class = "container p-0 m-auto">
+        <div class = "pt-3 pb-3 mx-auto">
+            <div class = "container row m-0 p-0">
+                <div class = "col-sm-5">
+                    <div class = " card p-3 pb-0 container shadow border-0 rounded">
+                        {% if movie.image %}
+                        <img loading = "lazy" class = "card-img-top rounded" src = "data:image/jpg;charset = utf-8;base64,{{ movie.image }}" alt = "Card image">
+                        {% else %}
+                        <img loading = "lazy" class = "card-img-top" src = "{{url_for('static',filename = 'images/codered.jpg')}}" alt = "Card image">
+                        {% endif %}
+                        <a href = "{{movie.trailer}}" target = "_blank" style = "font-family: monospace;" class = "text-dark mt-1 text-center stretched-link">Click for Trailer</a>
+                    </div>
+                    <div class = "card mt-3 mx-auto pt-3 pb-0 shadow border-0 rounded text-center">
+                        <p>
+                            <a href = "{{ url_for('like', id = movie.id) }}" class = "btn" style="background-color:rgb(177, 255, 190);"><i class = "thumb-up"></i> Like <span class="badge badge-light">{{movie.likes}}</span></a>  
+                            <a href = "{{ url_for('dislike', id = movie.id) }}" class = "btn" style="background-color: rgb(255, 162, 146);"><i class = "thumb-down"></i> Dislike <span class="badge badge-light">{{movie.dislikes}}</span></a>
+                        </p>
+                        {% if (movie.likes) %}
+                        <p>{{ (movie.likes)/(movie.likes + movie.dislikes) * 100}}% users loved this {{movie.movie_or_series}}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class = "col-sm-7">
+                    <div class = 'card pb-3 pl-md-4 mt-3 mt-md-0 container shadow border-0 rounded pt-3'>
+                        <h2><strong>{{movie.movie}}</strong></h2>
+                        {% if (movie.movie_or_series == "film series") %}
+
+                        <div class = "mb-3">
+                            <span class = "badge badge-pill badge-success">Film series</span>
+                        </div>
+
+                        {% elif (movie.movie_or_series == "series") %}
+
+                        <div class = "mb-3">
+                                <span class = "badge badge-pill badge-info">TV series</span>
+                        </div>
+
+                        {% else %}
+                        <div class = "mb-3">
+                            <span class = "badge badge-pill badge-dark">Movie</span>
+                        </div>
+
+                        {% endif %}
+                            
+                        <p>Genre : {{movie.genre}}</p>
+
+                        {% if (movie.movie_or_series == "film series") %}
+                        <p>Since {{movie.year}}</p>
+                        <p>{{movie.imdb|int}} movies</p>
+
+                        {% elif (movie.movie_or_series == "series") %}
+                        <p>Since {{movie.year}}</p>
+                        <p>{{movie.imdb|int}} seasons</p>
+
+                        {% else %}
+                        <p>Release year : {{movie.year}}</p>
+                        <p>IMDb : {{movie.imdb}}</p>
+
+                        {% endif %}
+
+                        {% if (movie.summary != None) %}
+                        <h5>Summary</h5>
+                        <p><em>{{ movie.summary }}</em></p>
+                        {% endif %}
+
+                        <div class =  "container-fluid">
+                            <p class = "float-right">
+                                <em>- <a href = "{{ url_for('user', name = movie.addedBy) }}" target = "_blank">{{movie.addedBy}}</a></em>
+                            </p>
+                        </div>
+                        <a class = "btn btn-success" href = "https://www.google.com/search?q={{movie.movie}} {{movie.movie_or_series}}" target = "_blank">Click for More Info</a>
+                    </div>
+                    {% if similar %}
+                    <div class = "card shadow mt-3 p-3 rounded border-0">
+                        <h4 class = "pb-0 pl-1 mb-0">Similar</h4>
+                        <div class = "row pl-3 pt-0">
+                        {% for each in similar %}
+                            <div class = "col-md-3 col-6 p-0">
+                                <div class = "card shadow p-0 mr-3 mt-3 rounded border-0 ">
+                                    <img loading = "lazy" class = "card-img-top rounded" src = "data:image/jpg;charset = utf-8;base64,{{each.image}}" alt = "Card image">
+                                </div>
+                                <a href = '{{ url_for("movie", id = each.id) }}' target = "_blank" class = "stretched-link"></a>
+                            </div>
+                        {% endfor %}
+                        </div>
+                        <a href = "{{ url_for('genre', genre = ' '.join(movie.genre.split('/'))) }}" target = "_blank" class = "btn mt-3 btn-dark">More</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class = " text-center">
+            <a href = "{{ url_for('edit',id = movie.id)}}" class = "btn btn-success mt-3">Edit Details</a>
+        </div>
+        {% endblock %}
+    </body>
+</html>
