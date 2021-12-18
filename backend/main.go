@@ -17,6 +17,7 @@ func main() {
 
 	api.HandleFunc("/", routehandlers.Home)
 	api.HandleFunc("/movie", routehandlers.Movie)
+	api.HandleFunc("/like", routehandlers.HandleLikes)
 
 	http.ListenAndServe(":8000", r)
 }
