@@ -1,12 +1,12 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 import './App.css';
-import PageNotFound from "./Components/404";
+import PageNotFound from "./components/404";
 
-import Footer from './Components/Footer';
-import Home from "./Components/Home";
-import Movie from "./Components/Movie";
-import Navbar from './Components/Navbar';
+import Footer from './components/Footer';
+import Home from "./components/Home";
+import Movie from "./components/Movie";
+import Navbar from './components/Navbar';
 
 
 function App() {
