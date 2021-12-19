@@ -1,30 +1,41 @@
+import {Link} from "react-router-dom"
+
+
 export default function Navbar() {
     return (
-        <div>
-            <div className = "container-fluid bg-dark text-white">
-                <nav className = "navbar">
-                    <div className = 'text-white'>
-                        <h3 className="mb-1 mt-1">Code Scarlet</h3>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light pl-2 pr-2">
+            <Link className="navbar-brand" to="/">Code Scarlet</Link>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul className="navbar-nav">
+                <li className="nav-item active">
+                    <Link className="nav-link" to="/">Home</Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/contribute">Contribute</Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/watchlist">Watchlist</Link>
+                </li>
+                <li className="nav-item dropdown">
+                    <Link className="nav-link dropdown-toggle" to="/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Genre
+                    </Link>
+                    <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <Link className="dropdown-item" to="/">Action</Link>
+                    <Link className="dropdown-item" to="/">Another action</Link>
+                    <Link className="dropdown-item" to="/">Something else here</Link>
                     </div>
-                    <div className = 'd-none d-md-flex btn-group float-right'>
-                        <div className = 'btn btn-secondary'><a href = "{{ url_for('index') }}" className = 'text-white'>Home</a></div>
-                        <div className = 'btn btn-secondary'><a href = "{{ url_for('random') }}" className = 'text-white'>Random movie</a></div>
-                        <div className = 'btn btn-secondary'><a href = "{{ url_for('genres') }}" className = 'text-white'>Genres</a></div>
-                        <div className = 'btn btn-secondary'><a href = "{{url_for('contribute') }}" className = 'text-white'>Contribute</a></div>
-                    </div>
-                    {/* <div className = 'd-md-none btn-group float-right'>
-                        <button type="button" className="btn btn-secondary dropdown-toggle shadow-none" data-toggle="dropdown">Menu
-                            <span className="caret"></span>
-                        </button>
-                        <ul className = 'dropdown-menu dropdown-menu-right shadow border-0' role = 'menu'>
-                            <li><a href = "{{ url_for('index') }}" className = 'text-center dropdown-item' role="menuitem">Home</a></li>
-                            <li><a href = "{{ url_for('random') }}" className = 'text-center dropdown-item' role="menuitem">Random movie</a></li>
-                            <li><a href = "{{url_for('genres') }}" className = 'text-center dropdown-item' role="menuitem">Genres</a></li>
-                            <li><a href = "{{url_for('contribute') }}" className = 'text-center dropdown-item' role="menuitem">Contribute</a></li>
-                        </ul>
-                    </div> */}
-                </nav>
+                </li>
+                </ul>
+                
             </div>
-        </div>
+            <form className="d-flex mr-2 ml-2">
+                <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </nav>
     )
 }

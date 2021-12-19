@@ -8,12 +8,15 @@ import Home from "./components/Home";
 import Movie from "./components/Movie";
 import Navbar from './components/Navbar';
 
+import "./styles/bootstrap.min.css"
+
 
 function App() {
   return (
   <div className='App'>
-    <Navbar/>
+    
     <BrowserRouter>
+      <Navbar/>
       <Routes>
         <Route path = "/" element = {<Home/>}/>
         <Route path = "/movie/:id" element = {<Movie/>}/>
