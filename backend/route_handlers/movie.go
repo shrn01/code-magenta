@@ -4,19 +4,29 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/davecgh/go-spew/spew"
-	"github.com/shrn01/code-scarlet/db_handlers"
+	"github.com/gorilla/mux"
 	"github.com/shrn01/code-scarlet/models"
 )
 
-func Movie(w http.ResponseWriter, r *http.Request) {
+func (app *App) Movie(w http.ResponseWriter, r *http.Request) {
+
+	vars := mux.Vars(r)
+	id := vars["id"]
+
 	movie := models.Movie{}
-	handler := db_handlers.GetHandler()
 
-	handler.Db.First(&movie)
+	result := app.DBhandler.Db.First(&movie, id)
 
-	spew.Dump(movie)
+	if result.Error != nil {
+		str := []byte(`{"Error" : "404 not Found"}`)
+		w.Write(str)
+		return
+	}
 
 	str, _ := json.Marshal(movie)
 	w.Write(str)
+}
+
+func (app *App) AddMovie(w http.ResponseWriter, r *http.Request) {
+	// Handle Write Movie
 }

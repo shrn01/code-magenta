@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-func HandleLikes(w http.ResponseWriter, r *http.Request) {
+func (app *App) HandleLikes(w http.ResponseWriter, r *http.Request) {
 
 	w.Write([]byte("Not implemented"))
 }

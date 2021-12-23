@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-func Genres(w http.ResponseWriter, r *http.Request) {
+func (app *App) Genres(w http.ResponseWriter, r *http.Request) {
 	bytes := []byte("not yet implemented")
 	w.Write(bytes)
 }

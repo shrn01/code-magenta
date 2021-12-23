@@ -1,7 +1,7 @@
 package models
 
 type Movies struct {
-	MovieIdList []int `json:"movie_id_list,omitempty"`
+	MovieList []map[string]interface{} `json:"movie_list"`
 }
 
 type Movie struct {
