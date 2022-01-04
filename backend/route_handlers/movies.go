@@ -7,14 +7,18 @@ import (
 	"github.com/shrn01/code-scarlet/models"
 )
 
-func (app *App) Movies(w http.ResponseWriter, r *http.Request) {
-	var movies []map[string]interface{}
+var value map[string]interface{} = map[string]interface{}{
+	"id": 1, "movie": "Titanic", "year": 1997, "imdb": 7.8,
+	"genre": "Romance", "actors": "", "likes": 0, "dislikes": 0, "summary": "", "added_by": "Tasak", "movie_or_series": "movie", "trailer": "https://www.youtube.com/watch?v=cIJ8ma0kKtY",
+}
 
-	result := app.DBhandler.Db.Model(&models.Movie{}).Select("id, movie").Find(&movies)
+func (app *App) Movies(w http.ResponseWriter, r *http.Request) {
+
+	movies, err := app.DBhandler.Readall()
 
 	moviez := models.Movies{MovieList: movies}
 
-	if result.Error != nil {
+	if err != nil {
 		str := []byte(`{"Error" : "404 not Found"}`)
 		w.Write(str)
 		return

@@ -2,6 +2,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 import './App.css';
 import PageNotFound from "./components/404";
+import { ContextProvider } from "./components/Context";
 import Contribute from "./components/Contribute";
 
 import Footer from './components/Footer';
@@ -17,6 +18,7 @@ import "./styles/bootstrap.min.css"
  */
 function App() {
   return (
+  <ContextProvider>
   <div className='App'>
     
     <BrowserRouter>
@@ -30,6 +32,7 @@ function App() {
       </Routes>
     </BrowserRouter>
   </div>
+  </ContextProvider>
   );
 }
 

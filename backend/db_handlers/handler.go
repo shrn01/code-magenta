@@ -8,34 +8,45 @@ import (
 )
 
 type Handler struct {
-	Db *gorm.DB
+	db *gorm.DB
 }
 
 func GetHandler() Handler {
 	handler := Handler{}
 	if MODE == "dev" {
-		handler.Db, _ = gorm.Open(sqlite.Open(URL), &gorm.Config{})
+		handler.db, _ = gorm.Open(sqlite.Open(URL), &gorm.Config{})
 	} else {
-		handler.Db, _ = gorm.Open(postgres.Open(URL), &gorm.Config{})
+		handler.db, _ = gorm.Open(postgres.Open(URL), &gorm.Config{})
 	}
 
 	return handler
 }
 
-func (h *Handler) Create(movie models.Movie) {
-	h.Db.Create(movie)
+func (h *Handler) Create(movie models.Movie) interface{} {
+	result := h.db.Create(movie)
+	return result
 }
 
-func (h *Handler) Read() {
-	/*
-		Implement this method to get movie object based on ID
-	*/
+func (h *Handler) ReadWithId(id int) (models.Movie, error) {
+	var movie models.Movie
+	result := h.db.First(&movie, id)
+	return movie, result.Error
 }
 
-func (h *Handler) Update(movie models.Movie) {
-	h.Db.Save(movie)
+func (h *Handler) Readall() ([]map[string]interface{}, error) {
+	var movies []map[string]interface{}
+	result := h.db.Model(&models.Movie{}).Select("id, movie").Find(&movies)
+	return movies, result.Error
 }
 
-func (h *Handler) Delete(movie models.Movie) {
-	h.Db.Delete(movie)
+// Db.Model(&models.Movie{}).Select("id, movie").Find(&movies)
+
+func (h *Handler) Update(movie models.Movie) interface{} {
+	result := h.db.Save(movie)
+	return result
+}
+
+func (h *Handler) Delete(movie models.Movie) bool {
+	result := h.db.Delete(movie)
+	return result.Error == nil
 }

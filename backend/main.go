@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/shrn01/code-scarlet/db_handlers"
 	"github.com/shrn01/code-scarlet/route_handlers"
@@ -26,5 +27,7 @@ func main() {
 	api.HandleFunc("/like/{id}", app.HandleLikes).Methods("POST")
 	api.HandleFunc("/genres", app.Genres)
 
-	http.ListenAndServe(":8000", r)
+	origins := handlers.AllowedOrigins([]string{"*"})
+
+	http.ListenAndServe(":8000", handlers.CORS(origins)(r))
 }

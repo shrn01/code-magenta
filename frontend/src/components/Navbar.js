@@ -19,15 +19,8 @@ export default function Navbar() {
                 <li className="nav-item">
                     <Link className="nav-link" to="/watchlist">Watchlist</Link>
                 </li>
-                <li className="nav-item dropdown">
-                    <Link className="nav-link dropdown-toggle" to="/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Genre
-                    </Link>
-                    <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <Link className="dropdown-item" to="/">Action</Link>
-                    <Link className="dropdown-item" to="/">Another action</Link>
-                    <Link className="dropdown-item" to="/">Something else here</Link>
-                    </div>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/genres">Genres</Link>
                 </li>
                 </ul>
                 

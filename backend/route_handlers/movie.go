@@ -3,21 +3,24 @@ package route_handlers
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
 
 	"github.com/gorilla/mux"
-	"github.com/shrn01/code-scarlet/models"
 )
 
 func (app *App) Movie(w http.ResponseWriter, r *http.Request) {
 
 	vars := mux.Vars(r)
-	id := vars["id"]
+	id, err := strconv.Atoi(vars["id"])
+	if err != nil {
+		str := []byte(`{"Error" : "id not a integer"}`)
+		w.Write(str)
+		return
+	}
 
-	movie := models.Movie{}
+	movie, err := app.DBhandler.ReadWithId(id)
 
-	result := app.DBhandler.Db.First(&movie, id)
-
-	if result.Error != nil {
+	if err != nil {
 		str := []byte(`{"Error" : "404 not Found"}`)
 		w.Write(str)
 		return
